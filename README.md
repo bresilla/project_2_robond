@@ -8,6 +8,25 @@ You're reading it!
 [image1]: ./misc_images/001.jpg
 [image2]: ./misc_images/002.jpg
 [image3]: ./misc_images/003.jpg
+[image4]: ./misc_images/004.jpg
+[image5]: ./misc_images/005.jpg
+[image6]: ./misc_images/006.jpg
+[image7]: ./misc_images/007.jpg
+[image8]: ./misc_images/008.jpg
+[image9]: ./misc_images/009.jpg
+[image10]: ./misc_images/010.jpg
+[image11]: ./misc_images/011.jpg
+[image12]: ./misc_images/012.jpg
+[image13]: ./misc_images/013.jpg
+[image14]: ./misc_images/014.jpg
+[image15]: ./misc_images/015.jpg
+[image16]: ./misc_images/016.jpg
+[image17]: ./misc_images/017.jpg
+[image18]: ./misc_images/018.jpg
+[image19]: ./misc_images/019.jpg
+[image20]: ./misc_images/020.jpg
+[image21]: ./misc_images/021.jpg
+[image22]: ./misc_images/022.jpg
 
 ### Kinematic Analysis
 #### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
@@ -78,7 +97,7 @@ T_EE = pickleit(T0_3*T0_6, "T_EE.pckl")
 
 And here's another image! 
 
-![alt text][./misc_images/003.jpg]
+![alt text][image2]
 
 ### Project Implementation
 

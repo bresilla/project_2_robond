@@ -78,7 +78,7 @@ T_EE = pickleit(T0_3*T0_6, "T_EE.pckl")
 
 And here's another image! 
 
-![alt text][image2]
+![alt text][./misc_images/003.jpg]
 
 ### Project Implementation
 

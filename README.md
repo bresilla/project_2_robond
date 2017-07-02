@@ -31,7 +31,7 @@ You're reading it!
 ### Kinematic Analysis
 #### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
 
-
+Based on URDF.XARCO file the DH parameters were extracted as below:
 
 |   i   | alpha(i-1) | a(i-1) | d(i)  | theta(i) |
 | :---: | :--------: | :----: | :---: | :------: |
@@ -43,9 +43,21 @@ You're reading it!
 | **6** |   -pi/2    |   0    |   0   |    q6    |
 | **7** |     0      |   0    | 0.303 |    0     |
 
+worth noting that from DH-parameters, one can make the scratch of robot arm, following rules:
 
+![alt text][image14]
+
+![alt text][image19]
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
+
+So, for forward kinematics, i used the homogeneous matrix:
+
+![alt text][image12]
+
+![alt text][image13]
+
+![alt text][image15]
 
 ```python
 def homogen(alpha, a, d, phi):
@@ -67,8 +79,6 @@ T5_6 = homogen(-pi/2,      0,     0,      q6)
 T6_G = homogen(    0,      0, 0.303,       0)
 ```
 
-
-
 ```python
 def pickleit(M, filename):
     if os.path.isfile(filename):
@@ -82,8 +92,6 @@ def pickleit(M, filename):
         file.close()      
     return N
 ```
-
-
 
 ```python
 T0_3 = pickleit(T0_1*T1_2*T2_3, "T0_3.pckl")

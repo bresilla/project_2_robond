@@ -46,15 +46,13 @@ Based on URDF.XARCO file the DH parameters were extracted as below:
 | **6** |   -pi/2    |   0    |   0   |    q6    |
 | **7** |     0      |   0    | 0.303 |    0     |
 
-worth noting that from DH-parameters, one can make the scratch of robot arm, following rules:
+worth noting that from DH-parameters, one can make the sketch of robot arm, following rules:
 
 ![alt text][image14]
 
 ![alt text][image19]
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
-
-So, for forward kinematics, i used the homogeneous matrix:
 
 So, forward kinematics is a chain rotation + displacement = transformation of space from base of arm to end effector. And as a chain it can be a product of each and every those transforms:
 
@@ -68,7 +66,7 @@ And as a result we can morph the transformation matrix that uses DH parameters:
 
 ![alt text][image15]
 
-So,, not to repeat the code (i got warned/advices from Project1 not to repeat code), i made a method that would take the DH parameters and would use them in transformation matrix and would make calculations and return the transformation.
+Not to repeat the code (i got warned/advices from Project1 not to repeat code), i made a method that would take the DH parameters and would use them in transformation matrix and would make calculations and return the transformation.
 
 ```python
 def homogen(alpha, a, d, phi):
@@ -108,9 +106,9 @@ def pickleit(M, filename):
     return N
 ```
 
-So for the first run, it will save the transformation matrix, then every other time, it will check if it exist, if yes, takes that and uses, if not, makes the intensive calculations.
+For the first run, it will save the transformation matrix, then every other time, it will check if it exist, if yes, takes that and uses, if not, makes the intensive calculations.
 
-Because the robot can be 'kinematically-decoupled' i separated even the FK in 1-3 joints and 3-6, then multiplied together to get end-effector-
+Because the robot can be 'kinematically-decoupled' i separated even the Forward Kinematics (FK) in 1-3 joints and 3-6, then multiplied together to get end-effector position.
 
 ```python
 T0_3 = pickleit(T0_1*T1_2*T2_3, "T0_3.pckl")
@@ -120,15 +118,29 @@ T_EE = pickleit(T0_3*T0_6, "T_EE.pckl")
 
 
 
-
-
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
-And here's another image! 
+Well, i was surprised to learn that Inverse Kinematics (IK) is actually a very hard task. There exist a ton of quality research dealing with it (with quality i mean research papers, not blog posts, even tho the later one was sometimes more humanly readable). There are many problems with IK if you dig deep on the topic!  One of them is the DOF and redundant joints. 
+
+As a illustration below, one robot arm, in its workspace, with two joints, has two possibilities to get top the point 3 in this case. If this arm would have just one more joint, then the possibilities would be infinite. And we know that infinite is human concept, robots dont know that :P
+
+![alt text][image17]
+
+Turns out, one arm is fully capable to maneuver in its workspace with 6DOF. A method named after his name, a man named Piper found out that you can simplify a quiet difficult problem into two small ones, solve each of them, then and them together for result. Kinematic decoupling can be applied to most of industrial robots that have more than 6DOF. But in order to use it, the robot must comply two iportant rules:
+
+- Three last adjacent joint axis should intersect, and
+- Three last adjacent joint are 'revolute'joints (has a spherical wrist)
 
 ![alt text][image20]
 
+If that is satisfied, the robot arm IK can be calculated using kinematic decoupling where:
+
+- three first joints determine position of wrist
+- three last joints make for the orientation of the wrist
+
 ![alt text][image21]
+
+
 
 ![alt text][image22]
 

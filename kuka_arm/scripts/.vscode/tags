@@ -1,0 +1,54 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+I0_3	../kinematics.py	/^I0_3 = (-1) * R0_3$/;"	kind:variable	line:110
+IK_server	../IK_server.py	/^def IK_server():$/;"	kind:function	line:150
+IK_server.py	../IK_server.py	1;"	kind:file	line:1
+O_EE	../kinematics.py	/^O_EE = rotate([roll, pitch, yaw], fixed=True)$/;"	kind:variable	line:88
+P_EE	../kinematics.py	/^P_EE = Matrix([[px],[py],[pz]])$/;"	kind:variable	line:89
+P_WC	../kinematics.py	/^P_WC = simplify(P_EE - 0.303 * O_EE * Matrix([[0],[0],[1]]))$/;"	kind:variable	line:90
+R0_3	../kinematics.py	/^R0_3 = R0_3.evalf(subs={q1:theta1, q2:theta2, q3:theta3})$/;"	kind:variable	line:109
+R0_3	../kinematics.py	/^R0_3 = T0_3[0:3, 0:3]$/;"	kind:variable	line:108
+R3_6	../kinematics.py	/^R3_6 = I0_3 * O_EE$/;"	kind:variable	line:111
+T0_1	../kinematics.py	/^T0_1 = homogen(    0,      0,  0.75,      q1)$/;"	kind:variable	line:64
+T0_3	../kinematics.py	/^T0_3 = pickleit(T0_1*T1_2*T2_3, "T0_3.pckl")$/;"	kind:variable	line:78
+T0_6	../kinematics.py	/^T0_6 = pickleit(T3_4*T4_5*T5_6*T6_G, "T0_6.pckl")$/;"	kind:variable	line:79
+T0_G	../kinematics.py	/^T0_G = T_EE*T_CO$/;"	kind:variable	line:84
+T1_2	../kinematics.py	/^T1_2 = homogen(-pi\/2,   0.35,     0, q2-pi\/2)$/;"	kind:variable	line:65
+T2_3	../kinematics.py	/^T2_3 = homogen(    0,   1.25,     0,      q3)$/;"	kind:variable	line:66
+T3_4	../kinematics.py	/^T3_4 = homogen(-pi\/2, -0.054,   1.5,      q4)$/;"	kind:variable	line:67
+T4_5	../kinematics.py	/^T4_5 = homogen( pi\/2,      0,     0,      q5)$/;"	kind:variable	line:68
+T5_6	../kinematics.py	/^T5_6 = homogen(-pi\/2,      0,     0,      q6)$/;"	kind:variable	line:69
+T6_G	../kinematics.py	/^T6_G = homogen(    0,      0, 0.303,       0)$/;"	kind:variable	line:70
+T_CO	../kinematics.py	/^T_CO = pickleit(transform([0, -pi\/2, pi], [0,0,0]), "T_CO.pckl")$/;"	kind:variable	line:81
+T_EE	../kinematics.py	/^T_EE = pickleit(T0_3*T0_6, "T_EE.pckl")$/;"	kind:variable	line:80
+a2	../kinematics.py	/^a2 = 0.35$/;"	kind:variable	line:93
+a3	../kinematics.py	/^a3 = 1.25$/;"	kind:variable	line:94
+c3	../kinematics.py	/^c3 = cos((xc*xc + yc*yc + zc*zc - a2*a2 - a3*a3)\/2*a2*a3)$/;"	kind:variable	line:101
+ca	../kinematics.py	/^ca = sqrt(a2*a2 + a3*a2)$/;"	kind:variable	line:95
+d6	../kinematics.py	/^d6 = 0.303$/;"	kind:variable	line:96
+handle_calculate_IK	../IK_server.py	/^def handle_calculate_IK(req):$/;"	kind:function	line:65
+homogen	../IK_server.py	/^def homogen(alpha, a, d, phi):$/;"	kind:function	line:45
+homogen	../kinematics.py	/^def homogen(alpha, a, d, phi):$/;"	kind:function	line:39
+kinematics.py	../kinematics.py	1;"	kind:file	line:1
+pickleit	../IK_server.py	/^def pickleit(M, filename):$/;"	kind:function	line:52
+pickleit	../kinematics.py	/^def pickleit(M, filename):$/;"	kind:function	line:46
+rotate	../IK_server.py	/^def rotate(R, fixed=False):   $/;"	kind:function	line:12
+rotate	../kinematics.py	/^def rotate(R, fixed=False):   $/;"	kind:function	line:6
+s3	../kinematics.py	/^s3 = sin(sqrt(1-c3*c3))$/;"	kind:variable	line:102
+target_spawn.py	../target_spawn.py	1;"	kind:file	line:1
+theta1	../kinematics.py	/^theta1 = atan2(yc, xc)$/;"	kind:variable	line:104
+theta2	../kinematics.py	/^theta2 = atan2(s3, c3)$/;"	kind:variable	line:105
+theta3	../kinematics.py	/^theta3 = atan2(zc, ca) - atan2(a2*s3, a2 + a3*c3)$/;"	kind:variable	line:106
+theta4	../kinematics.py	/^theta4 = atan2(R3_6[2,1],R3_6[2,2])$/;"	kind:variable	line:115
+theta5	../kinematics.py	/^theta5 = atan2(-R3_6[2,0], sqrt(R3_6[0,0]*R3_6[0,0]+R3_6[1,0]*R3_6[1,0]))$/;"	kind:variable	line:114
+theta6	../kinematics.py	/^theta6 = atan2(R3_6[1,0],R3_6[0,0])$/;"	kind:variable	line:113
+transform	../IK_server.py	/^def transform(R, D, fixed=False):$/;"	kind:function	line:26
+transform	../kinematics.py	/^def transform(R, D, fixed=False):$/;"	kind:function	line:20
+update_spawn_location	../target_spawn.py	/^def update_spawn_location():$/;"	kind:function	line:13
+xc	../kinematics.py	/^xc = P_WC[0]$/;"	kind:variable	line:97
+yc	../kinematics.py	/^yc = P_WC[1]$/;"	kind:variable	line:98
+zc	../kinematics.py	/^zc = P_WC[2]$/;"	kind:variable	line:99

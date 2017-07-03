@@ -138,15 +138,28 @@ If that is satisfied, the robot arm IK can be calculated using kinematic decoupl
 - three first joints determine position of wrist
 - three last joints make for the orientation of the wrist
 
+
+Firstly is important to find the wrist center position then the orientation. The wrist center is the intersection of three joints axes. So from there to get the position of whist center is quiet simple. We are actually given the desired orientation and position where the end-efector should be. And we simply transform from there to wrist center for distance d in z axis from end-efector POSE. 
+
+So, first three thetas control position:
+
 ![alt text][image21]
 
-
+Finding theta1, theta2 and theta3 then is just a mater of trigonometric math maneuvers, as seen below:
 
 ![alt text][image22]
+
+Now for theta4, 5, and 6.
+
+From FK, we concluded that T06 = T03 * T36. Now from Poosition part of IK, we know T03. We need to find the orientation, or transformation from link 3 to 6 - T36. So we can derive to this equation: T36 = T03(-1) * R. And we see that the right hand side is completely known. The final three thetas can be found as a set of Euler angles corresponding to T36.
+
+![alt text][image9]
 
 ### Project Implementation
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
+
+
 
 
 

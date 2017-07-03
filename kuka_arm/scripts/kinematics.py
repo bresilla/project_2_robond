@@ -89,6 +89,8 @@ O_EE = rotate([roll, pitch, yaw], fixed=True)
 P_EE = Matrix([[px],[py],[pz]])
 P_WC = simplify(P_EE - 0.303 * O_EE * Matrix([[0],[0],[1]]))
 
+print P_WC
+
 ### POSITION
 a2 = 0.35
 a3 = 1.25

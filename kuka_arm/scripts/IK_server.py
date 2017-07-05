@@ -62,7 +62,7 @@ def pickleit(M, filename):
     return N
 
 
-def handle_calculate_IK(req):
+def calculations(req):
     rospy.loginfo("Received %s eef-poses from the plan" % len(req.poses))
     if len(req.poses) < 1:
         print "No valid poses received"
@@ -138,8 +138,6 @@ def handle_calculate_IK(req):
             theta5 = atan2(-R3_6[2,0], sqrt(R3_6[0,0]*R3_6[0,0]+R3_6[1,0]*R3_6[1,0]))
             theta4 = atan2(R3_6[2,1],R3_6[2,2])
 
-            # Populate response for the IK request
-            # In the next line replace theta1,theta2...,theta6 by your joint angle variables
 	    joint_trajectory_point.positions = [theta1, theta2, theta3, theta4, theta5, theta6]
 	    joint_trajectory_list.append(joint_trajectory_point)
 
@@ -150,7 +148,7 @@ def handle_calculate_IK(req):
 def IK_server():
     # initialize node and declare calculate_ik service
     rospy.init_node('IK_server')
-    s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK)
+    s = rospy.Service('calculate_ik', CalculateIK, calculations)
     print "Ready to receive an IK request"
     rospy.spin()
 

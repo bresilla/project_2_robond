@@ -2,7 +2,7 @@
 
 ## Writeup / README
 
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  
+#### 1. Provide a Writeup / README.  
 
 You're reading it!  
 
@@ -32,7 +32,7 @@ You're reading it!
 [image22]: ./misc_images/022.jpg
 
 ### Kinematic Analysis
-#### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
+#### 1. DH parameters.
 
 Based on URDF.XARCO file the DH parameters were extracted as below:
 
@@ -52,7 +52,7 @@ worth noting that from DH-parameters, one can make the sketch of robot arm, foll
 
 ![alt text][image19]
 
-#### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
+#### 2. Individual transformations.
 
 So, forward kinematics is a chain rotation + displacement = transformation of space from base of arm to end effector. And as a chain it can be a product of each and every those transforms:
 
@@ -118,7 +118,7 @@ T_EE = pickleit(T0_3*T0_6, "T_EE.pckl")
 
 
 
-#### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
+#### 3. Decouple Inverse Kinematics.
 
 Well, i was surprised to learn that Inverse Kinematics (IK) is actually a very hard task. There exist a ton of quality research dealing with it (with quality i mean research papers, not blog posts, even tho the later one was sometimes more humanly readable). There are many problems with IK if you dig deep on the topic!  One of them is the DOF and redundant joints. 
 
@@ -149,19 +149,65 @@ Finding theta1, theta2 and theta3 then is just a mater of trigonometric math man
 
 ![alt text][image22]
 
-Now for theta4, 5, and 6.
+Now for theta 4, 5, and 6.
 
 From FK, we concluded that T06 = T03 * T36. Now from Poosition part of IK, we know T03. We need to find the orientation, or transformation from link 3 to 6 - T36. So we can derive to this equation: T36 = T03(-1) * R. And we see that the right hand side is completely known. The final three thetas can be found as a set of Euler angles corresponding to T36.
 
 ![alt text][image9]
 
+
+
 ### Project Implementation
 
-#### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
+As described before, i did not follow completely the way the code was given to us (not to repeat code). So i made few methods that wold help the process.
 
+Firstly i made a rotation matrix method. The method would take three angles and would make a matrix out of them. As Euler's rule, any rotation can be described as three consecutive rotation in respective 3D axes.
 
+The method would then return either INTRINSIC or EXTRINSIC  (if fixed=False) rotation matrix. I used this method to correct the rotation between the Base frame and Gripper frame.
 
+```python
+def rotate(R, fixed=False):   
+    roll = Matrix([[1,         0,          0],
+                   [0, cos(R[0]), -sin(R[0])],
+                   [0, sin(R[0]),  cos(R[0])]])
+    pitch = Matrix([[ cos(R[1]), 0,  sin(R[1])],
+                    [         0, 1,          0],
+                    [-sin(R[1]), 0,  cos(R[1])]])
+    yaw = Matrix([[cos(R[2]), -sin(R[2]), 0],
+                  [sin(R[2]),  cos(R[2]), 0],
+                  [        0,          0, 1]])
+    if fixed:
+        return simplify(roll * pitch * yaw)
+    else:
+        return simplify(yaw * pitch * roll)
+```
 
+Secind method i  coded was a transformation matrix. It will take roll, pitch, yaw, x, y, z and would return a complete transformation matrix (not to mix with the homogeneous transform from DH parameters). I ended up not using it, but still decided to let it there in case i want to make any modifications.
 
+```python
+def transform(R, D, fixed=False):
+    roll = Matrix([[1,         0,          0],
+                   [0, cos(R[0]), -sin(R[0])],
+                   [0, sin(R[0]),  cos(R[0])]])
+    pitch = Matrix([[ cos(R[1]), 0,  sin(R[1])],
+                    [         0, 1,          0],
+                    [-sin(R[1]), 0,  cos(R[1])]])
+    yaw = Matrix([[cos(R[2]), -sin(R[2]), 0],
+                  [sin(R[2]),  cos(R[2]), 0],
+                  [        0,          0, 1]])
+    if fixed:
+        r = roll * pitch * yaw
+    else:
+        r = yaw * pitch * roll
+    T = Matrix([[r[0, 0], r[0, 1], r[0, 2], D[0]],
+                [r[1, 0], r[1, 1], r[1, 2], D[1]],
+                [r[2, 0], r[2, 1], r[2, 2], D[2]], 
+                [      0,       0,       0,   1]])
+    return simplify(T)
+```
 
+Then i made two other methods that were described above, the PICKLE method and the Transformation method (see 2nd part of this writeup on how i implemented the forward kinematics).
 
+Then lastly i put everything together to get the code working!
+
+To be honest, i could not make the arm moving, because i  don't see it, even-though i exported GAZEBO_MODELS! I decided to submit the homework just because i worked a lot to understand all the logic behind the forward and inverse kinematics.

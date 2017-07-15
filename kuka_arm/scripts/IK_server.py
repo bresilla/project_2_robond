@@ -114,14 +114,15 @@ def calculations(req):
             P_WC = simplify(P_EE - 0.303 * O_EE * Matrix([[0],[0],[1]]))
 
             ### POSITION
-            a2 = 0.35
-            a3 = 1.25
-            d6 = 0.303
+            a2 = 1.25
+            a3 = 1.5
+            
             xc = P_WC[0]
             yc = P_WC[1]
             zc = P_WC[2]
-            ca = sqrt(a2*2 + a3*3)
-            c3 = cos((xc*2 + yc*2 + zc*2 - a2*2 - a3*2)/2*a2*a3)
+
+            ca = sqrt(a2**2 + a3**2)
+            c3 = cos((xc**2 + yc**2 + zc**2 - a2**2 - a3**2)/2*a2*a3)
             s3 = sin(sqrt(1-c3))
 
             theta1 = atan2(yc, xc)

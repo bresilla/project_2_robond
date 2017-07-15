@@ -5,7 +5,7 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 I0_3	../kinematics.py	/^I0_3 = (-1) * R0_3$/;"	kind:variable	line:112
-IK_server	../IK_server.py	/^def IK_server():$/;"	kind:function	line:150
+IK_server	../IK_server.py	/^def IK_server():$/;"	kind:function	line:149
 IK_server.py	../IK_server.py	1;"	kind:file	line:1
 O_EE	../kinematics.py	/^O_EE = rotate([roll, pitch, yaw], fixed=True)$/;"	kind:variable	line:88
 P_EE	../kinematics.py	/^P_EE = Matrix([[px],[py],[pz]])$/;"	kind:variable	line:89
@@ -29,8 +29,8 @@ a2	../kinematics.py	/^a2 = 0.35$/;"	kind:variable	line:95
 a3	../kinematics.py	/^a3 = 1.25$/;"	kind:variable	line:96
 c3	../kinematics.py	/^c3 = cos((xc*xc + yc*yc + zc*zc - a2*a2 - a3*a3)\/2*a2*a3)$/;"	kind:variable	line:103
 ca	../kinematics.py	/^ca = sqrt(a2*a2 + a3*a2)$/;"	kind:variable	line:97
+calculations	../IK_server.py	/^def calculations(req):$/;"	kind:function	line:65
 d6	../kinematics.py	/^d6 = 0.303$/;"	kind:variable	line:98
-handle_calculate_IK	../IK_server.py	/^def handle_calculate_IK(req):$/;"	kind:function	line:65
 homogen	../IK_server.py	/^def homogen(alpha, a, d, phi):$/;"	kind:function	line:45
 homogen	../kinematics.py	/^def homogen(alpha, a, d, phi):$/;"	kind:function	line:39
 kinematics.py	../kinematics.py	1;"	kind:file	line:1

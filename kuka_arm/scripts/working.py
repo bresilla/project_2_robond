@@ -104,8 +104,9 @@ def inverse_kinematics(position, orientation):
     d2, a3, d3, a4 = 0, 1.25, -0.054, 1.5
     l2 = sqrt(d2**2 + a3**2)
     l3 = sqrt(d3**2 + a4**2)
+
+    '''
     h1 = sqrt(wx**2 + wy**2)
-    
     theta1 = atan2(wy, wx)
     ct3 = cos((wx**2 + wy**2 + wz**2 - l2**2 - l3**2)/2*l2*l3)
     theta3 = atan2(-1 * sqrt(1-(ct3**2)), ct3)
@@ -114,6 +115,15 @@ def inverse_kinematics(position, orientation):
     s1=((l2+ac2) * wz - as2 * h1) / (h1**2+ wz**2)
     c1=((l2+ac2) * h1 + as2 * wz) / (h1**2 + wz**2)
     theta2 = atan2(s1, c1)
+    '''
+    ca = sqrt(l2*2 + l3*3)
+    c3 = cos((wx*2 + wy*2 + wz*2 - l2*2 - l3*2)/2*l2*l3)
+    s3 = sin(sqrt(1-c3))
+
+    theta1 = atan2(wy, wx)
+    theta3 = atan2(s3, c3)
+    theta2 = atan2(wz, ca) - atan2(l2*s3, l2 + l3*c3)
+    
    
     ### ORIENTATION ####################################################################################
     R0_3 = pickleit("T0_3.pckl", readonly=true)[0:3, 0:3]
@@ -123,6 +133,11 @@ def inverse_kinematics(position, orientation):
     theta6 = atan2(R3_6[1,0],R3_6[0,0])
     theta5 = atan2(-R3_6[2,0], sqrt(R3_6[0,0]*R3_6[0,0]+R3_6[1,0]*R3_6[1,0]))
     theta4 = atan2(R3_6[2,1],R3_6[2,2])
+
+
+
+
+
     return [theta1, theta2, theta3, theta4, theta5, theta6]
 
 forward_kinematics(DH())
